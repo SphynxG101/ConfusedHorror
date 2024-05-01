@@ -24,7 +24,7 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         keycount = 0;
         PlayerPrefs.SetInt("KeyCount", keycount);
-        transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 1, Random.Range(-53f, 42f));
+        //transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 1, Random.Range(-53f, 42f));
     }
 
     
