@@ -29,42 +29,42 @@ public class MonsterMovement : MonoBehaviour
         
         if (keycount == 0)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 50)
+            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 35)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
         }
         else if (keycount == 1)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 40)
+            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 30)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
         }
         else if (keycount == 2)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 30)
+            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 25)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
         }
         else if (keycount == 3)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 25)
+            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 20)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
         }
         else if (keycount == 4)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 20)
+            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 15)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
         }
         else if (keycount == 5)
         {
-            while (Vector3.Distance(pos, position) < 7.5f || Vector3.Distance(pos, position) > 15)
+            while (Vector3.Distance(pos, position) > 10)
             {
                 position = transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f));
             }
