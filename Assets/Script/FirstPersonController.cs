@@ -1,7 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using Random = UnityEngine.Random;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -9,25 +14,28 @@ public class FirstPersonController : MonoBehaviour
     public Rigidbody RB;
     public float MouseSensitivity = 3;
     public float WalkSpeed = 10;
-    public float JumpPower = 7;
     public List<GameObject> Floors;
     public Vector2 look;
-    
+    public TextMeshProUGUI keytext;
+    public int keycount = 0;
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        keycount = 0;
+        PlayerPrefs.SetInt("KeyCount", keycount);
+        transform.position = new Vector3(Random.Range(-48.5f, 46.5f), 1, Random.Range(-53f, 42f));
     }
 
     
     void Update()
     {
+        
+        //look.y = -Input.GetAxis("Mouse Y") * MouseSensitivity;
+        //look.y = Mathf.Clamp(look.y, -89f, 89f);
+        //Eyes.transform.Rotate(look.y,0,0);
+        
         look.x = Input.GetAxis("Mouse X") * MouseSensitivity;
-        look.y = -Input.GetAxis("Mouse Y") * MouseSensitivity;
-
-        look.y = Mathf.Clamp(look.y, -89f, 89f);
-            
-        Eyes.transform.Rotate(look.y,0,0);
         transform.Rotate(0,look.x,0);
         
         
@@ -44,10 +52,6 @@ public class FirstPersonController : MonoBehaviour
                 move += transform.right;
             move = move.normalized * WalkSpeed;
             
-            //if (JumpPower > 0 && Input.GetKeyDown(KeyCode.Space) && OnGround())
-            //    move.y = JumpPower;
-            //else
-            move.y = RB.velocity.y;
             RB.velocity = move;
         }
     }
@@ -66,5 +70,17 @@ public class FirstPersonController : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         Floors.Remove(other.gameObject);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        KeyScript key = other.gameObject.GetComponent<KeyScript>();
+        if (key != null)
+        {
+            keycount++;
+            PlayerPrefs.SetInt("KeyCount", keycount);
+            keytext.text = "Keys Collected: " + keycount + "/5";
+            key.getBumped();
+        }
     }
 }
