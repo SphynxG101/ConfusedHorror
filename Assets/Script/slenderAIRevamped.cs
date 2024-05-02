@@ -30,16 +30,11 @@ public class slenderAIRevamped : MonoBehaviour
     //The player's health
     public float playerHealth = 100;
 
-    public Slider healthSlider;
-
     //The player's Transform
     public Transform player;
 
     //Slender's main Transform
     public Transform monsterMainTransform;
-
-    //Slender's jumpscare camera
-    public GameObject jumpscareCam;
 
     //Slender's destination
     Vector3 dest;
@@ -52,9 +47,6 @@ public class slenderAIRevamped : MonoBehaviour
 
     //Integers used to make sure things don't occur more than once in the Update() void
     int token, token3, token4;
-
-    //Enable this bool if you are using a health slider
-    public bool usingHealthSlider;
 
     //Enable this if you want your Cursor to be enabled after death
     public bool enableCursorAfterDeath;
@@ -70,9 +62,6 @@ public class slenderAIRevamped : MonoBehaviour
 
     //Float used for the static sound's volume
     float staticVolume;
-
-    //List of Slender's teleport destinations
-    public List<Transform> teleportDestinations;
 
     //Slender's raycast script
     public raycastSlender raycastScript;
@@ -104,8 +93,7 @@ public class slenderAIRevamped : MonoBehaviour
         teleportChance = Random.Range(0, 2); //teleportChance will equal to a random range of numbers between 0 and 2 (technically 0 and 1, since the last is never picked)
         if (teleportChance == 0) //If teleportChance equals to 0, Slender will teleport to a random destination
         {
-            randNum = Random.Range(0, teleportDestinations.Count); //randNum will equal to a random range of numbers between 0 and the amount of transforms in the teleportDestinations list
-            monsterMainTransform.position = teleportDestinations[randNum].position; //Slender will teleport to random destination determined by randNum
+            monsterMainTransform.position = new Vector3(Random.Range(-48.5f, 46.5f), 2, Random.Range(-53f, 42f)); //Slender will teleport to random destination determined by randNum
         }
     }
 
@@ -140,7 +128,7 @@ public class slenderAIRevamped : MonoBehaviour
                 token3 = 0; //token3 = 0, which means the function tied to that token can happen again
                 if (token4 == 0) //If token4 equals to 0,
                 {
-                    randNum2 = Random.Range(0, 2); //randNum2 will equal to a random range of numbers between 0 and 2
+                    randNum2 = Random.Range(0, 3); //randNum2 will equal to a random range of numbers between 0 and 2
                     if (randNum2 == 0) //If randNum2 equals to 0,
                     {
                         jumpscareSound.Play(); //The jumpscare sound will play
@@ -190,11 +178,7 @@ public class slenderAIRevamped : MonoBehaviour
                 playerHealth = 100; //playerHealth equals to 100
             }
         }
-
-        if (usingHealthSlider == true) //If usingHealthSlider equals to true,
-        {
-            healthSlider.value = playerHealth; //The health slider equals to the value of playerHealth
-        }
+        
         staticSound.volume = staticVolume; //The static sound's Audio Source's volume equals to the value of staticVolume
         staticOpacity.a = staticAmount; //The staticOpacity Color variable's opacity will equal to the value of staticAmount
         staticscreen.color = staticOpacity; //The static image's color will equal to staticOpacity
@@ -218,7 +202,6 @@ public class slenderAIRevamped : MonoBehaviour
                 staticAmount = 0.9f; //staticAmount equals to 0.9
             }
             player.gameObject.SetActive(false); //The player object will be disabled
-            jumpscareCam.SetActive(true); //Slender's jumpscare camera will be enabled
             ai.speed = 0; //Slender's speed will equal to 0
             ai.SetDestination(transform.position); //Sets the AI's destination to itself.
         }
